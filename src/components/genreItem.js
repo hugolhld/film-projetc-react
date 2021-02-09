@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 export const GenreItem = (props) => {
-    const {genreName} = props;
+    const {genreName, goTo} = props;
     return (
         <View style={styles.main_container}>
-            <TouchableOpacity style={styles.main_button}>
+            <TouchableOpacity style={styles.main_button} onPress={goTo}>
                 <Text style={styles.text_color}>{genreName.name}</Text>
             </TouchableOpacity>
         </View>

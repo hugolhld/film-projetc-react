@@ -56,3 +56,30 @@ export function getGenres() {
         )
     ).then(result => result.json())
 }
+
+export function getGenresId(id, page) {
+    return fetch(
+        getApiUrl(
+            '/discover/movie',
+            {
+                language: 'fr-FR',
+                sort_by: 'popularity.desc',
+                include_adult: 'false',
+                include_video: 'false',
+                page: page,
+                with_genres: id
+            }
+        )
+    ).then(result => result.json())
+}
+
+export function getMovieCredits(id) {
+    return fetch(
+        getApiUrl(
+            `/movie/${id}/credits`,
+            {
+                language: 'fr-FR'
+            }
+        )
+    ).then(result => result.json())
+}

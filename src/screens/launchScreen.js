@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Button, Image, FlatList, ActivityIndicator, SafeAreaView} from "react-native";
 import {getGenres} from "../services/movie";
 import {GenreItem} from '../components/genreItem'
+import {Logo} from '../components/logo'
 
-export const LaunchScreen = () => {
+export const LaunchScreen = (props) => {
 
     // const {navigation} = props;
     // const handlePressButton = (type) => {
@@ -25,15 +26,16 @@ export const LaunchScreen = () => {
 
     return (
         <View style={styles.main_container}>
-            <Image
-                style={styles.tinyLogo}
-                source={require('../../assets/logo.jpg')}
-            />
-            <SafeAreaView style={styles.flex_container}>
+            <Logo />
+            <SafeAreaView /* style={styles.flex_container} */>
                 <FlatList
+                style={styles.flex_container}
                     data={genres}
                     keyExtractor={item => item.id.toString()}
-                    renderItem={({item}) => <GenreItem genreName={item} />}
+                    renderItem={({item}) => <GenreItem 
+                        genreName={item} 
+                        goTo={() => props.navigation.navigate('Genre', {genre: item.name, id: item.id})}
+                        />}
                     />
                 {/* { isLoading ?
                     <View>
@@ -52,6 +54,11 @@ const styles = StyleSheet.create({
         marginTop: 20,
         justifyContent: 'space-around',
     },
+    logo_container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     tinyLogo: {
         width: 100,
         height: 100,
@@ -60,7 +67,9 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     flex_container: {
-        flex: 4,
+        flex: 1,
         flexWrap: 'wrap',
+        flexDirection: 'row',
+        // flexFlow
     }
 })

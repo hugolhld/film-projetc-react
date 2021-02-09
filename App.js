@@ -1,22 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import {NavigationContainer} from "@react-navigation/native";
 import { StyleSheet, Text, View } from 'react-native';
-import {LaunchScreen} from './src/screens/launchScreen'
-import {GenreItem} from './src/components/genreItem'
+// import {LaunchScreen} from './src/screens/launchScreen'
+import {NavGenre} from './src/navigations/navGenre'
+import {NavBottom} from './src/navigations/navBottom'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <LaunchScreen />
-    </View>
+    <NavigationContainer /* style={styles.container} */>
+      <NavBottom />
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#F4F4F4',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
