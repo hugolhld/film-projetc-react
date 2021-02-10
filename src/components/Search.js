@@ -18,6 +18,8 @@ export const Search = (props) => {
                     style={styles.textinput}
                     placeholder='Titre du film'
                     onChangeText={onChangeText}
+                    placeholderTextColor={'#B00020'}
+                    palceholderFontWeight={'bold'}
                 />
             </View>
             <View style={styles.flex_button}>
@@ -32,9 +34,8 @@ export const Search = (props) => {
 const styles = StyleSheet.create({
     main_container: {
         padding: 30,
-        backgroundColor: '#fd4556',
-        borderBottomLeftRadius: 15,
-        borderBottomRightRadius: 15
+        backgroundColor: '#B00020',
+        borderRadius: 15,
     },
     input_container: {
         flexDirection: 'row',
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     search_button: {
         backgroundColor: '#B5A90F',
         padding: 10,
-        borderRadius: 10,
+        borderRadius: 5,
         textTransform: 'uppercase',
     },
     flex_button: {

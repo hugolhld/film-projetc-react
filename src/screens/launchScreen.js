@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Button, Image, FlatList, ActivityIndicator, SafeAreaView} from "react-native";
+import {View, StyleSheet, Button, Image, FlatList, ActivityIndicator, SafeAreaView, ScrollView} from "react-native";
 import {getGenres} from "../services/movie";
 import {GenreItem} from '../components/genreItem'
 import {Logo} from '../components/logo'
@@ -26,24 +26,26 @@ export const LaunchScreen = (props) => {
 
     return (
         <View style={styles.main_container}>
-            <Logo />
-            <SafeAreaView /* style={styles.flex_container} */>
-                <FlatList
-                style={styles.flex_container}
-                    data={genres}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={({item}) => <GenreItem 
-                        genreName={item} 
-                        goTo={() => props.navigation.navigate('Genre', {genre: item.name, id: item.id})}
-                        />}
-                    />
-                {/* { isLoading ?
-                    <View>
-                        <ActivityIndicator size='large' color={'#000'} />
-                    </View>
-                    : null
-                } */}
-            </SafeAreaView>
+            <ScrollView>
+                <Logo />
+                <SafeAreaView /* style={styles.flex_container} */>
+                    <FlatList
+                    style={styles.flex_container}
+                        data={genres}
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={({item}) => <GenreItem 
+                            genreName={item} 
+                            goTo={() => props.navigation.navigate('Genre', {genre: item.name, id: item.id})}
+                            />}
+                        />
+                    {/* { isLoading ?
+                        <View>
+                            <ActivityIndicator size='large' color={'#000'} />
+                        </View>
+                        : null
+                    } */}
+                </SafeAreaView>
+            </ScrollView>
         </View>
     )
 }

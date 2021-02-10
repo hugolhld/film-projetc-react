@@ -1,16 +1,20 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import shouldUseActivityState from 'react-native-screens';
-import {LaunchScreen} from "../screens/launchScreen";
-import ListByGenre from "../screens/listByGenre";
 import SearchScreen from '../screens/SearchScreen'
+import {NavGenre} from './navGenre'
 
 const TabNavigator = createBottomTabNavigator();
 
 export const NavBottom = () => {
   return (
-    <TabNavigator.Navigator>
-      <TabNavigator.Screen name="Home" component={LaunchScreen} />
+    <TabNavigator.Navigator
+        tabBarOptions={{
+            activeTintColor: '#fff',
+            activeBackgroundColor: '#B00020',
+            swipeEnabled: true,
+        }}
+    >
+      <TabNavigator.Screen name="Home" component={NavGenre} />
       <TabNavigator.Screen name="Search" component={SearchScreen} />
     </TabNavigator.Navigator>
   );

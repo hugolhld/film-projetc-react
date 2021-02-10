@@ -1,11 +1,9 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
-import {View, StyleSheet, Button, FlatList, ActivityIndicator, SafeAreaView, Text} from "react-native";
+import React, {useLayoutEffect} from 'react';
+import {View, StyleSheet, Button, FlatList, SafeAreaView, Text} from "react-native";
 import {getGenresId} from "../services/movie";
-import {GenreItem} from '../components/genreItem'
 import { FontAwesome } from '@expo/vector-icons'; 
 import { FilmItem } from '../components/filmItem'
 import { render } from 'react-dom';
-import { useRoute } from '@react-navigation/native';
 // import {data} from '../helpers/filmDatas'
 
 export default class ListByGenre extends React.Component{
@@ -89,11 +87,6 @@ export default class ListByGenre extends React.Component{
 
     render() {
         return (
-            // <View>
-            //     <Text>Hello world</Text>
-            //     {this._renderResult()}
-            //     {/* {console.log(route.params.genre)} */}
-            // </View>
             <View style={styles.main_container}>
                 <Button title="Load" onPress={this._loadFilms}/>
                 <View style={styles.header_genre}>

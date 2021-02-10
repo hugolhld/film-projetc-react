@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
     logo_container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: 20
     },
     tinyLogo: {
         width: 150,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View, StyleSheet, Text, FlatList, ActivityIndicator, Image} from "react-native";
+import {SafeAreaView, View, StyleSheet, Text, FlatList, ActivityIndicator, Image, ScrollView} from "react-native";
 import {Search} from "../components/Search";
 import {ResultSearch} from "../components/ResultSearch";
 import {FilmItem} from "../components/filmItem";
@@ -53,7 +53,7 @@ export default class SearchScreen extends React.Component {
                     data={this.state.filmsState}
                     renderItem={({item, index}) => <FilmItem film={item} index={index} goToDetail={() => this.props.navigation.navigate('Detail', {title: item.title, id: item.id})} />}
                     keyExtractor={item => item.id.toString()}
-                    onEndReachedThreshold={0.5}
+                    onEndReachedThreshold={1}
                     onEndReached={() => {
                         if (this.page < this.totalPages) {
                             this._loadFilms();
@@ -77,20 +77,22 @@ export default class SearchScreen extends React.Component {
     render() {
         const {searchText} = this.state;
         return (
-            <SafeAreaView style={styles.main_container}>
-                <Logo />
-                {/* <Fade initValue={0} toValue={1} duration={1000} customStyles={{flex: 1}}> */}
-                    <Search handleSearch={this.handleSearchText} handleClickButton={this._searchFilms}/>
-                    {this.state.searchText !== '' ? <ResultSearch textSearched={searchText}/> : null}
-                    {this._renderResult()}
-                    { this.state.isLoading ?
-                        <View style={styles.loading_container}>
-                            <ActivityIndicator size='large' color={'#000'} />
-                        </View>
-                        : null
-                    }
-                {/* </Fade> */}
-            </SafeAreaView>
+            <ScrollView>
+                <SafeAreaView style={styles.main_container}>
+                    <Logo />
+                    {/* <Fade initValue={0} toValue={1} duration={1000} customStyles={{flex: 1}}> */}
+                        <Search handleSearch={this.handleSearchText} handleClickButton={this._searchFilms}/>
+                        {/* {this.state.searchText !== '' ? <ResultSearch textSearched={searchText}/> : null} */}
+                        {this._renderResult()}
+                        { this.state.isLoading ?
+                            <View style={styles.loading_container}>
+                                <ActivityIndicator size='large' color={'#000'} />
+                            </View>
+                            : null
+                        }
+                    {/* </Fade> */}
+                </SafeAreaView>
+            </ScrollView>
         )
     }
 }

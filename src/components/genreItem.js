@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderBottomColor: '#B00020',
         borderBottomWidth: 3,
+        textAlign: 'center',
     },
     text_color: {
         color: '#B00020',
