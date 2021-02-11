@@ -12,7 +12,6 @@ export const Search = (props) => {
     return (
         <View style={styles.main_container}>
             <View style={styles.input_container}>
-                {/* <Image source={require('../../assets/images/loupe.jpg')} style={styles.picto}/> */}
                 <FontAwesome name="search" size={24} color="#B00020" />
                 <TextInput
                     style={styles.textinput}
@@ -36,6 +35,7 @@ const styles = StyleSheet.create({
         padding: 30,
         backgroundColor: '#B00020',
         borderRadius: 15,
+		// paddingTop: getStatusBarHeight(),
     },
     input_container: {
         flexDirection: 'row',

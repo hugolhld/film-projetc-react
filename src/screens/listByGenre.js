@@ -1,5 +1,5 @@
 import React, {useLayoutEffect} from 'react';
-import {View, StyleSheet, Button, FlatList, SafeAreaView, Text} from "react-native";
+import {View, StyleSheet, Button, FlatList, SafeAreaView, Text, ScrollView, Dimensions} from "react-native";
 import {getGenresId} from "../services/movie";
 import { FontAwesome } from '@expo/vector-icons'; 
 import { FilmItem } from '../components/filmItem'
@@ -24,7 +24,7 @@ export default class ListByGenre extends React.Component{
         getGenresId(route.params.id, this.page + 1)
             .then(data => {
                 this.page = data.page
-                this.totalPage = data.total_pages
+                this.totalPages = data.total_pages
                 this.setState({filmList: [...this.state.filmList, ...data.results], isLoading: false})
                 })
                 console.log('ok')
@@ -58,19 +58,20 @@ export default class ListByGenre extends React.Component{
     // console.log(totalPages);
 
     _renderResult = () => {
-        this._loadFilms()
+        // this._loadFilms()
         if(this.state.filmList.length > 0) {
-            return <View>
+            return <View style={{flex:1 ,height:Dimensions.get('window').height}}>
                 <FlatList
                     data={this.state.filmList}
                     renderItem={({item}) => <FilmItem film={item} />}
                     keyExtractor={item => item.id.toString()}
-                    onEndReachedThreshold={1}
+                    onEndReachedThreshold={0.5}
                     onEndReached={() => {
                         console.log('end')
-                        // if(this.page < this.total_pages) {
-                        //     this._loadFilms()
-                        // }
+                        console.log(this.page + ' ' + this.totalPages);
+                        if(this.page < this.totalPages) {
+                            this._loadFilms()
+                        }
                     }}
                 />
             </View>
@@ -87,36 +88,38 @@ export default class ListByGenre extends React.Component{
 
     render() {
         return (
-            <View style={styles.main_container}>
-                <Button title="Load" onPress={this._loadFilms}/>
-                <View style={styles.header_genre}>
-                    <View style={styles.header_flex}>
-                        <FontAwesome name="arrow-left" size={24} color="#B5A90F" />
-                        <Text>Aventure - {/* {route.params.genre} */}</Text>
+            <ScrollView style={styles.main_container}>
+                {/* <ScrollView> */}
+                    <Button title="Load" onPress={this._loadFilms}/>
+                    <View style={styles.header_genre}>
+                        <View style={styles.header_flex}>
+                            <FontAwesome name="arrow-left" size={24} color="#B5A90F" />
+                            <Text>Aventure - {/* {route.params.genre} */}</Text>
+                        </View>
                     </View>
-                </View>
-                <SafeAreaView style={styles.flex_container}>
-                    {/* <FlatList
-                        data={filmList}
-                        keyExtractor={item => item.id.toString()}
-                        renderItem={({item}) => <FilmItem film={item} goToDetail="" index="2" />}
-                        onEndReachedThreshold={0.5}
-                        onEndReached={() => {
-                                console.log('+1');
-                        }}
-                        /> */}
-                        {this._renderResult()}
-                </SafeAreaView>
-            </View>
+                    <SafeAreaView style={styles.flex_container}>
+                        {/* <FlatList
+                            data={filmList}
+                            keyExtractor={item => item.id.toString()}
+                            renderItem={({item}) => <FilmItem film={item} goToDetail="" index="2" />}
+                            onEndReachedThreshold={0.5}
+                            onEndReached={() => {
+                                    console.log('+1');
+                            }}
+                            /> */}
+                            {this._renderResult()}
+                    </SafeAreaView>
+                {/* </ScrollView> */}
+            </ScrollView>
         )
     }
 }
 
 const styles = StyleSheet.create({
     main_container: {
-        // flex: 1,
-        // marginTop: 20,
-        justifyContent: 'space-around',
+        flex: 1,
+        marginTop: 20,
+        // justifyContent: 'space-around',
     },
     tinyLogo: {
         width: 40,

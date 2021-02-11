@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View, StyleSheet, Text, FlatList, ActivityIndicator, Image, ScrollView} from "react-native";
+import {SafeAreaView, View, StyleSheet, Text, FlatList, ActivityIndicator, Image, ScrollView, Dimensions} from "react-native";
 import {Search} from "../components/Search";
 import {ResultSearch} from "../components/ResultSearch";
 import {FilmItem} from "../components/filmItem";
@@ -48,7 +48,7 @@ export default class SearchScreen extends React.Component {
 
     _renderResult = () => {
         if (this.state.filmsState.length > 0) {
-            return <View>
+            return <SafeAreaView style={{flex:1 ,height:Dimensions.get('window').height}}>
                 <FlatList
                     data={this.state.filmsState}
                     renderItem={({item, index}) => <FilmItem film={item} index={index} goToDetail={() => this.props.navigation.navigate('Detail', {title: item.title, id: item.id})} />}
@@ -60,7 +60,7 @@ export default class SearchScreen extends React.Component {
                         }
                     }}
                 />
-            </View>
+            </SafeAreaView>
         }
 
         return(
@@ -77,7 +77,7 @@ export default class SearchScreen extends React.Component {
     render() {
         const {searchText} = this.state;
         return (
-            <ScrollView>
+            <View>
                 <SafeAreaView style={styles.main_container}>
                     <Logo />
                     {/* <Fade initValue={0} toValue={1} duration={1000} customStyles={{flex: 1}}> */}
@@ -92,7 +92,7 @@ export default class SearchScreen extends React.Component {
                         }
                     {/* </Fade> */}
                 </SafeAreaView>
-            </ScrollView>
+            </View>
         )
     }
 }

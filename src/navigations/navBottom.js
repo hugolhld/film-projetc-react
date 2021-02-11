@@ -12,6 +12,7 @@ export const NavBottom = () => {
             activeTintColor: '#fff',
             activeBackgroundColor: '#B00020',
             swipeEnabled: true,
+            showLabel: true
         }}
     >
       <TabNavigator.Screen name="Home" component={NavGenre} />
