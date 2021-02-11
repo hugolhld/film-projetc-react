@@ -30,7 +30,7 @@ export const LaunchScreen = (props) => {
                 <Logo />
                 <SafeAreaView /* style={styles.flex_container} */>
                     <FlatList
-                    style={styles.flex_container}
+                        style={styles.flex_container}
                         data={genres}
                         keyExtractor={item => item.id.toString()}
                         renderItem={({item}) => <GenreItem 
@@ -70,8 +70,10 @@ const styles = StyleSheet.create({
     },
     flex_container: {
         flex: 1,
+        // alignItems: 'baseline',
+        // alignContent: 'flex-start',
         flexWrap: 'wrap',
-        flexDirection: 'row',
+        // alignItems: 'flex-start'
         // flexFlow
     }
 })

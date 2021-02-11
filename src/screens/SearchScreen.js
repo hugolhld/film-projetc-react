@@ -48,7 +48,7 @@ export default class SearchScreen extends React.Component {
 
     _renderResult = () => {
         if (this.state.filmsState.length > 0) {
-            return <SafeAreaView style={{flex:1 ,height:Dimensions.get('window').height}}>
+            return <View /* style={styles.result_container} */ style={{height:Dimensions.get('window').height}}>
                 <FlatList
                     data={this.state.filmsState}
                     renderItem={({item, index}) => <FilmItem film={item} index={index} goToDetail={() => this.props.navigation.navigate('Detail', {title: item.title, id: item.id})} />}
@@ -60,7 +60,7 @@ export default class SearchScreen extends React.Component {
                         }
                     }}
                 />
-            </SafeAreaView>
+            </View>
         }
 
         return(
@@ -77,34 +77,36 @@ export default class SearchScreen extends React.Component {
     render() {
         const {searchText} = this.state;
         return (
-            <View>
+            // <View>
                 <SafeAreaView style={styles.main_container}>
                     <Logo />
                     {/* <Fade initValue={0} toValue={1} duration={1000} customStyles={{flex: 1}}> */}
                         <Search handleSearch={this.handleSearchText} handleClickButton={this._searchFilms}/>
                         {/* {this.state.searchText !== '' ? <ResultSearch textSearched={searchText}/> : null} */}
                         {this._renderResult()}
-                        { this.state.isLoading ?
+                        {/* { this.state.isLoading ?
                             <View style={styles.loading_container}>
                                 <ActivityIndicator size='large' color={'#000'} />
                             </View>
                             : null
-                        }
+                        } */}
                     {/* </Fade> */}
                 </SafeAreaView>
-            </View>
+            // </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 1,
+        // flex: 1,
+        backgroundColor: '#fff'
     },
     result_container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: '#fff'
     },
     text_no_result: {
         fontSize: 20,
@@ -112,12 +114,12 @@ const styles = StyleSheet.create({
         color: '#B5A90F',
     },
     no_found_container: {
-        flex: 1,
+        // flex: 1,
       justifyContent: 'center',
       alignItems: 'center'
     },
     loading_container: {
-    bottom: 300
+        bottom: 300
     },
     tinyLogo: {
         width: 100,

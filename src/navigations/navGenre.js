@@ -11,7 +11,22 @@ export const NavGenre = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Accueil" component={LaunchScreen} options={{headerShown: false}} />
-            <Stack.Screen name="Genre" component={ListByGenre}  />
+            <Stack.Screen
+                name="Genre"
+                component={ListByGenre}
+                // options={({ route }) => ({ title: route.params.genre })}
+                options={{
+                    // title: params.genre,
+                    headerStyle: {
+                      backgroundColor: '#B00020',
+                    },
+                    headerTintColor: '#B5A90F',
+                    headerTitleStyle: {
+                      fontWeight: 'bold',
+                    },
+                  }}
+          
+                />
             {/* <Stack.Screen name="Recherche" component={MainBottomNavigator} />
             <Stack.Screen name="Latest" component={DetailScreen} /> */}
         </Stack.Navigator>

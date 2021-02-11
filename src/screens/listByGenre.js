@@ -91,12 +91,12 @@ export default class ListByGenre extends React.Component{
             <ScrollView style={styles.main_container}>
                 {/* <ScrollView> */}
                     <Button title="Load" onPress={this._loadFilms}/>
-                    <View style={styles.header_genre}>
+                    {/* <View style={styles.header_genre}>
                         <View style={styles.header_flex}>
                             <FontAwesome name="arrow-left" size={24} color="#B5A90F" />
-                            <Text>Aventure - {/* {route.params.genre} */}</Text>
+                            <Text>Aventure - {route.params.genre}</Text>
                         </View>
-                    </View>
+                    </View> */}
                     <SafeAreaView style={styles.flex_container}>
                         {/* <FlatList
                             data={filmList}

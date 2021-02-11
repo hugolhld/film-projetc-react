@@ -54,13 +54,13 @@ export const FilmItem = (props) => {
 
 const styles = StyleSheet.create({
     main_container: {
-        height: 150,
+        // height: 150,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
     },
     content_container: {
-        flex: 1,
+        // flex: 1,
         margin: 5,
         justifyContent: 'center',
     },
