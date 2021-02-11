@@ -5,9 +5,10 @@ import {ResultSearch} from "../components/ResultSearch";
 import {FilmItem} from "../components/filmItem";
 import {searchMovie} from "../services/movie";
 import {Logo} from '../components/logo'
+import {FilmDetailsHeader} from '../components/filmDetailsHeader'
 // import Fade from "../animations/Fade";
 
-export default class SearchScreen extends React.Component {
+export default class FilmDetails extends React.Component {
     state = {
         searchText: '',
         filmsState: [],
@@ -78,18 +79,7 @@ export default class SearchScreen extends React.Component {
         return (
             // <View>
                 <SafeAreaView style={styles.main_container}>
-                    <Logo />
-                    {/* <Fade initValue={0} toValue={1} duration={1000} customStyles={{flex: 1}}> */}
-                        <Search handleSearch={this.handleSearchText} handleClickButton={this._searchFilms}/>
-                        {/* {this.state.searchText !== '' ? <ResultSearch textSearched={searchText}/> : null} */}
-                        {this._renderResult()}
-                        {/* { this.state.isLoading ?
-                            <View style={styles.loading_container}>
-                                <ActivityIndicator size='large' color={'#000'} />
-                            </View>
-                            : null
-                        } */}
-                    {/* </Fade> */}
+                    <FilmDetailsHeader/>
                 </SafeAreaView>
             // </View>
         )

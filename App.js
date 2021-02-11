@@ -5,12 +5,16 @@ import { StyleSheet, Text, View } from 'react-native';
 // import {LaunchScreen} from './src/screens/launchScreen'
 import {NavGenre} from './src/navigations/navGenre'
 import {NavBottom} from './src/navigations/navBottom'
+import FilmDetails from './src/screens/filmDetails'
 
 export default function App() {
   return (
     <NavigationContainer /* style={styles.container} */>
       <NavBottom />
     </NavigationContainer>
+    // <View>
+    //   <FilmDetails/>
+    // </View>
   );
 }
 

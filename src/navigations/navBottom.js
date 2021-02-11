@@ -2,6 +2,8 @@ import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SearchScreen from '../screens/SearchScreen'
 import {NavGenre} from './navGenre'
+import { FontAwesome } from '@expo/vector-icons'; 
+
 
 const TabNavigator = createBottomTabNavigator();
 
@@ -9,14 +11,24 @@ export const NavBottom = () => {
   return (
     <TabNavigator.Navigator
         tabBarOptions={{
-            activeTintColor: '#fff',
+            activeTintColor: '#B5A90F',
             activeBackgroundColor: '#B00020',
-            swipeEnabled: true,
-            showLabel: true
+            inactiveBackgroundColor: '#B00020',
+            inactiveTintColor: '#fff',
+            // swipeEnabled: true,
+            showLabel: false
         }}
     >
-      <TabNavigator.Screen name="Home" component={NavGenre} />
-      <TabNavigator.Screen name="Search" component={SearchScreen} />
+      <TabNavigator.Screen 
+              name="Home"
+              component={NavGenre}
+              options={{tabBarIcon: ({color}) => (<FontAwesome name="home" size={24} color={color} />)}}
+              />
+      <TabNavigator.Screen 
+              name="Search"
+              component={SearchScreen}
+              options={{tabBarIcon: ({color}) => (<FontAwesome name="search" size={24} color={color} />)}}
+              />
     </TabNavigator.Navigator>
   );
 }
