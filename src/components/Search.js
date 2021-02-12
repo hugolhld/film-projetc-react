@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Button, View, TextInput, StyleSheet, Image, TouchableOpacity, Text} from "react-native";
+import {View, TextInput, StyleSheet, TouchableOpacity, Text} from "react-native";
 import { FontAwesome } from '@expo/vector-icons'; 
 
 export const Search = (props) => {
@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
         padding: 30,
         backgroundColor: '#B00020',
         borderRadius: 20,
-		// paddingTop: getStatusBarHeight(),
     },
     input_container: {
         flexDirection: 'row',
@@ -61,7 +60,6 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     flex_button: {
-        // flex: 1,
         justifyContent: 'flex-end',
         flexDirection: 'row',
     },

@@ -25,8 +25,6 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: '#fff',
-        // borderBottomColor: '#B00020',
-        // borderBottomWidth: 3,
         textAlign: 'center',
         shadowColor: '#B00020',
         shadowOffset: {

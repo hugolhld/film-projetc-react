@@ -14,7 +14,6 @@ export const Logo = () => {
 
 const styles = StyleSheet.create({
     logo_container: {
-        // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20

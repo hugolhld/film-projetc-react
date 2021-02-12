@@ -1,37 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {getMovieCredits ,getMovie} from "../services/movie";
 
 export const FilmItem = (props) => {
     const {film, goToDetail, index} = props;
-    const [filmData, setFilmData] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
-    const [directorName, setDirectorName] = useState([])
-
-    // if(!isLoading)
-    // {
-    //     getDirectorMovie(movieId.id)
-    //         .then(data => {
-    //             setMovieCrew(data)
-    //             if(movieCrew)
-    //             {
-    //                 for(let i = 0;i < movieCrew.crew.length; i++)
-    //                 {
-    //                     if(movieCrew.crew[i].job == 'Director')
-    //                     {
-    //                         setMovieDirector(movieCrew.crew[i])
-    //                         setIsLoading(true)
-    //                         i = movieCrew.crew.length
-    //                     }
-    //                 }
-    //                 setIsLoading(true)
-    //             }
-    //         })
-    // }
-
     return (
         <View style={styles.main_container} >
-            <TouchableOpacity /* style={styles.main_container}  */onPress={goToDetail}>
+            <TouchableOpacity onPress={goToDetail}>
                 <View style={styles.main_information_container}>
                     <View style={styles.main_information_content}>
                         <Image source={{uri: `https://image.tmdb.org/t/p/original${film.poster_path}`}} style={styles.image} />
@@ -40,8 +14,6 @@ export const FilmItem = (props) => {
                                 <Text style={styles.title_text}>{film.title}</Text>
                             </View>
                             <View>
-                                {/* <Text style={styles.title_text}>{directorName}</Text> */}
-                                {/* {film.production_companies.length > 0 && <Text style={styles.director}>{film.production_companies[0].name}</Text>} */}
                             </View>
                             <View>
                                 <Text style={{color: '#B5A90F'}}>{film.release_date}</Text>
@@ -74,7 +46,6 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     content_container: {
-        // flex: 1,
         margin: 5,
         justifyContent: 'center',
     },

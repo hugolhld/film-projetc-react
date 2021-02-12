@@ -1,11 +1,9 @@
 import React from 'react';
-import {SafeAreaView, View, StyleSheet, Text, FlatList, ActivityIndicator, Image, ScrollView, Dimensions} from "react-native";
+import {SafeAreaView, View, StyleSheet, Text, FlatList, Image} from "react-native";
 import {Search} from "../components/Search";
-import {ResultSearch} from "../components/ResultSearch";
 import {FilmItem} from "../components/filmItem";
 import {searchMovie} from "../services/movie";
 import {Logo} from '../components/logo'
-// import Fade from "../animations/Fade";
 
 export default class SearchScreen extends React.Component {
     state = {
@@ -24,7 +22,6 @@ export default class SearchScreen extends React.Component {
     }
 
     _searchFilms = () => {
-        //Permet de réinitialiser le state entre deux recherches différentes
         this.page = 0;
         this.totalPages = 0;
         this.setState({filmsState: []});
@@ -76,22 +73,11 @@ export default class SearchScreen extends React.Component {
 
     render() {
         return (
-            // <View>
                 <SafeAreaView style={styles.main_container}>
                     <Logo />
-                    {/* <Fade initValue={0} toValue={1} duration={1000} customStyles={{flex: 1}}> */}
                         <Search handleSearch={this.handleSearchText} handleClickButton={this._searchFilms}/>
-                        {/* {this.state.searchText !== '' ? <ResultSearch textSearched={searchText}/> : null} */}
                         {this._renderResult()}
-                        {/* { this.state.isLoading ?
-                            <View style={styles.loading_container}>
-                                <ActivityIndicator size='large' color={'#000'} />
-                            </View>
-                            : null
-                        } */}
-                    {/* </Fade> */}
                 </SafeAreaView>
-            // </View>
         )
     }
 }

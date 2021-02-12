@@ -15,7 +15,6 @@ export const NavBottom = () => {
             activeBackgroundColor: '#B00020',
             inactiveBackgroundColor: '#B00020',
             inactiveTintColor: '#fff',
-            // swipeEnabled: true,
             showLabel: false
         }}
     >

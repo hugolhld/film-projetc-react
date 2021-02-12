@@ -49,20 +49,17 @@ export const DetailScreen = (props) => {
                             </TouchableOpacity>
                             {movie.title !== '' && <Text style={styles.title}>{movie.title}</Text>}
                             {movie.runtime !== '' && <Text style={styles.title}>{movie.runtime} minutes</Text>}
-                            {/* {movie.production_companies.length > 0 && <Text style={styles.director}>{movie.production_companies[0].name}</Text>}*/}
                         </View>
                     </View>
                     <Text style={styles.overviewTitle}>Synopsis</Text>
                     {movie.overview !== '' && <Text style={styles.overview}>{movie.overview}</Text>}
                 </View>
             </ScrollView>
-            {/* {movie.homepage !== '' && ( */}
                 <TouchableOpacity onPress={handlePress} style={styles.footer} >
                     <Text style={{textAlign: 'center', color: '#B5A90F'}}>
                         Trailer
                     </Text>
                 </TouchableOpacity>
-            {/* )} */}
         </View>
 
     )
