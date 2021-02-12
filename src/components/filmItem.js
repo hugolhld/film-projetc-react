@@ -30,7 +30,7 @@ export const FilmItem = (props) => {
     // testt()
     // console.log(filmData.production_companies.length > 0 && <Text style={styles.director}>{filmData.production_companies[0].name}</Text>);
     return (
-        <View style={styles.shadow}>
+        <View>
             <TouchableOpacity style={styles.main_container} onPress={goToDetail}>
                 <View style={styles.main_information_container}>
                     <Image source={{uri: `https://image.tmdb.org/t/p/original${film.poster_path}`}} style={styles.image} />
@@ -58,11 +58,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        // borderWidth: 1,
-        // borderColor: 'red',
-        
+        shadowColor: '#B00020',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.85,
+        shadowRadius:1.3,
 
-        // elevation: 5,
+        elevation: 5,
     },
     shadow: {  
         // borderColor:'yourchoice', // if you need 

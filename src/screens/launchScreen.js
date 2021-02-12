@@ -31,6 +31,7 @@ export const LaunchScreen = (props) => {
                 <SafeAreaView style={styles.flex_container}>
                     <FlatList
                         // style={styles.flex_container}
+                        numColumns={2}
                         data={genres}
                         keyExtractor={item => item.id.toString()}
                         renderItem={({item}) => <GenreItem 
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     flex_container: {
+        // width: '100%',
         // flex: 1,
         // justifyContent: 'center',
         // backgroundColor: 'blue',
@@ -78,11 +80,11 @@ const styles = StyleSheet.create({
         // flexWrap: 'wrap',
         // alignItems: 'flex-start'
         // flexFlow
-        flex: 1,
+        // flex: 7,
         // height: 500,
-        alignItems: 'flex-start',
-        alignContent: 'flex-start',
-        flexWrap: 'wrap',
-        flexDirection: 'row'
+        // alignItems: 'flex-start',
+        // alignContent: 'flex-start',
+        // flexWrap: 'wrap',
+        // flexDirection: 'row'
     }
 })

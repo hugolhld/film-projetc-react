@@ -18,6 +18,7 @@ export default class ListByGenre extends React.Component{
         super(props)
         this.page = 0
         this.totalPages = 0
+        this._loadFilms()
         // this.props.navigation.setOptions({
         //     title: /* this.state.title ? 'Editing My Profile' : 'My Profile', */ 'Hello'
         //   });
@@ -95,7 +96,6 @@ export default class ListByGenre extends React.Component{
         return (
             <View style={styles.main_container}>
                 {/* <View> */}
-                    <Button title="Load" onPress={this._loadFilms}/>
                     {/* <View style={styles.header_genre}>
                         <View style={styles.header_flex}>
                             <FontAwesome name="arrow-left" size={24} color="#B5A90F" />

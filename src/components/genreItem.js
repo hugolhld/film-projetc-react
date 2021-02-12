@@ -14,6 +14,7 @@ export const GenreItem = (props) => {
 
 const styles = StyleSheet.create({
     main_container: {
+        flex: 1,
         marginHorizontal: 5,
         marginVertical: 10,
         flexDirection: 'row',
@@ -24,9 +25,18 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 20,
         backgroundColor: '#fff',
-        borderBottomColor: '#B00020',
-        borderBottomWidth: 3,
+        // borderBottomColor: '#B00020',
+        // borderBottomWidth: 3,
         textAlign: 'center',
+        shadowColor: '#B00020',
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.85,
+        shadowRadius:1.3,
+
+        elevation: 5,
     },
     text_color: {
         color: '#B00020',
