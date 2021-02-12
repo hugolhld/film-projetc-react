@@ -3,7 +3,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {LaunchScreen} from "../screens/launchScreen";
 import ListByGenre from "../screens/listByGenre";
 // import {MainBottomNavigator} from "./MainBottomNavigator";
-// import {DetailScreen} from "../screens/DetailScreen";
+import {DetailScreen} from "../screens/filmDetails";
 
 const Stack = createStackNavigator();
 
@@ -14,21 +14,21 @@ export const NavGenre = () => {
             <Stack.Screen
                 name="Genre"
                 component={ListByGenre}
-                // options={({ route }) => ({ title: route.params.genre })}
                 options={{
-                    // title: params.genre,
-                    headerStyle: {
-                      backgroundColor: '#B00020',
-                    },
-                    headerTintColor: '#B5A90F',
-                    headerTitleStyle: {
-                      fontWeight: 'bold',
-                    },
-                  }}
+                  // title: ({ route }) => ({ title: route.params.genre }),
+                  headerStyle: {
+                    backgroundColor: '#B00020',
+                  },
+                  headerTintColor: '#B5A90F',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }}
+                // options={({ route }) => ({ title: route.params.genre })}
           
                 />
-            {/* <Stack.Screen name="Recherche" component={MainBottomNavigator} />
-            <Stack.Screen name="Latest" component={DetailScreen} /> */}
+            {/* <Stack.Screen name="Recherche" component={MainBottomNavigator} />*/}
+            <Stack.Screen name="Detail" component={DetailScreen} /> 
         </Stack.Navigator>
     )
 }

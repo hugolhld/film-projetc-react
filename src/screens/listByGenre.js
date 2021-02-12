@@ -9,6 +9,7 @@ import { render } from 'react-dom';
 export default class ListByGenre extends React.Component{
     state = {
         filmList: [],
+        // title
     }
     page
     totalPages
@@ -17,6 +18,9 @@ export default class ListByGenre extends React.Component{
         super(props)
         this.page = 0
         this.totalPages = 0
+        // this.props.navigation.setOptions({
+        //     title: /* this.state.title ? 'Editing My Profile' : 'My Profile', */ 'Hello'
+        //   });
     }
 
     _loadFilms = () => {
@@ -63,7 +67,7 @@ export default class ListByGenre extends React.Component{
             return <View style={{flex:1 ,height:Dimensions.get('window').height}}>
                 <FlatList
                     data={this.state.filmList}
-                    renderItem={({item}) => <FilmItem film={item} />}
+                    renderItem={({item}) => <FilmItem film={item} goToDetail={() => this.props.navigation.navigate('Detail', {title: item.title, id: item.id})}/>}
                     keyExtractor={item => item.id.toString()}
                     onEndReachedThreshold={0.5}
                     onEndReached={() => {
@@ -77,19 +81,20 @@ export default class ListByGenre extends React.Component{
             </View>
         }
     }
+   
 
-    _accessRoute = () => {
-        useLayoutEffect(() => {
-            navigation.setOptions({
-                genre: route && route.params && route.params.genre ? route.params.genre : 'Error'
-            })
-        })
-    }
+    // _accessRoute = () => {
+    //     useLayoutEffect(() => {
+    //         navigation.setOptions({
+    //             genre: route && route.params && route.params.genre ? route.params.genre : 'Error'
+    //         })
+    //     })
+    // }
 
     render() {
         return (
-            <ScrollView style={styles.main_container}>
-                {/* <ScrollView> */}
+            <View style={styles.main_container}>
+                {/* <View> */}
                     <Button title="Load" onPress={this._loadFilms}/>
                     {/* <View style={styles.header_genre}>
                         <View style={styles.header_flex}>
@@ -109,8 +114,8 @@ export default class ListByGenre extends React.Component{
                             /> */}
                             {this._renderResult()}
                     </SafeAreaView>
-                {/* </ScrollView> */}
-            </ScrollView>
+                {/* </View> */}
+            </View>
         )
     }
 }

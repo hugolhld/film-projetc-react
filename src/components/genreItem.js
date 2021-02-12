@@ -16,9 +16,12 @@ const styles = StyleSheet.create({
     main_container: {
         marginHorizontal: 5,
         marginVertical: 10,
-        flexDirection: 'column',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignContent: 'flex-start',
     },
     main_button: {
+        flex: 1,
         padding: 20,
         backgroundColor: '#fff',
         borderBottomColor: '#B00020',
@@ -27,6 +30,7 @@ const styles = StyleSheet.create({
     },
     text_color: {
         color: '#B00020',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 })

@@ -30,7 +30,7 @@ export const FilmItem = (props) => {
     // testt()
     // console.log(filmData.production_companies.length > 0 && <Text style={styles.director}>{filmData.production_companies[0].name}</Text>);
     return (
-        <View style={styles.main_container}>
+        <View style={styles.shadow}>
             <TouchableOpacity style={styles.main_container} onPress={goToDetail}>
                 <View style={styles.main_information_container}>
                     <Image source={{uri: `https://image.tmdb.org/t/p/original${film.poster_path}`}} style={styles.image} />
@@ -54,10 +54,24 @@ export const FilmItem = (props) => {
 
 const styles = StyleSheet.create({
     main_container: {
-        // height: 150,
+        margin: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        // borderWidth: 1,
+        // borderColor: 'red',
+        
+
+        // elevation: 5,
+    },
+    shadow: {  
+        // borderColor:'yourchoice', // if you need 
+        borderWidth:1,
+        overflow: 'hidden',
+        shadowColor: 'red',
+        shadowRadius: 10,
+        shadowOpacity: 1,
+        elevation: 10
     },
     content_container: {
         // flex: 1,
@@ -65,7 +79,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     main_information_container: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        // shadowColor: "#B00020",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 4,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3,
     },
     image: {
         width: 80,

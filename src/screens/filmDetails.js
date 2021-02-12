@@ -1,117 +1,152 @@
-import React from 'react';
-import {SafeAreaView, View, StyleSheet, Text, FlatList, ActivityIndicator, Image, ScrollView, Dimensions} from "react-native";
-import {Search} from "../components/Search";
-import {ResultSearch} from "../components/ResultSearch";
-import {FilmItem} from "../components/filmItem";
-import {searchMovie} from "../services/movie";
-import {Logo} from '../components/logo'
-import {FilmDetailsHeader} from '../components/filmDetailsHeader'
-// import Fade from "../animations/Fade";
+import React, {useLayoutEffect, useState, useEffect} from 'react';
+import {Text, View, Image, StyleSheet, ScrollView, Button, Linking} from "react-native";
+import {getLatest, getMovie} from "../services/movie";
 
-export default class FilmDetails extends React.Component {
-    state = {
-        searchText: '',
-        filmsState: [],
-        isLoading: false,
-    }
+export const DetailScreen = (props) => {
+    const {route, navigation} = props;
+    const [movie, setMovie] = useState(null);
 
-    page;
-    totalPages;
-
-    constructor(props) {
-        super(props);
-        this.page = 0;
-        this.totalPages = 0;
-    }
-
-    _searchFilms = () => {
-        //Permet de réinitialiser le state entre deux recherches différentes
-        this.page = 0;
-        this.totalPages = 0;
-        this.setState({filmsState: []});
-
-        this._loadFilms();
-    }
-
-    handleSearchText = (text) => {
-        this.setState({searchText: text})
-    }
-
-    _loadFilms = () => {
-        this.setState({isLoading: true})
-        searchMovie(this.state.searchText, this.page + 1)
-            .then(data => {
-                this.page = data.page;
-                this.totalPages = data.total_pages;
-                this.setState({filmsState: [...this.state.filmsState, ...data.results], isLoading: false});
-            })
-    }
-
-    _renderResult = () => {
-        if (this.state.filmsState.length > 0) {
-            return <View style={{height:Dimensions.get('window').height}}>
-                <FlatList
-                    data={this.state.filmsState}
-                    renderItem={({item, index}) => <FilmItem film={item} index={index} goToDetail={() => this.props.navigation.navigate('Detail', {title: item.title, id: item.id})} />}
-                    keyExtractor={item => item.id.toString()}
-                    onEndReachedThreshold={1}
-                    onEndReached={() => {
-                        if (this.page < this.totalPages) {
-                            this._loadFilms();
-                        }
-                    }}
-                />
-            </View>
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: route && route.params && route.params.title ? route.params.title : 'Dernier film sortit'
+        })
+    })
+    useEffect(() => {
+        if (route && route.params && route.params.id) {
+            getMovie(route.params.id)
+                .then(setMovie)
+        } else {
+            getLatest()
+                .then(setMovie)
         }
+    }, [])
 
-        return(
-            <View style={styles.no_found_container}>
+    function handlePress() {
+        if (movie) {
+            Linking.canOpenURL(movie.homepage).then((supported) => {
+                if (supported) {
+                    Linking.openURL(movie.homepage);
+                } else {
+                    console.log("Don't know how to open URI: " + movie.homepage);
+                }
+            });
+        }
+    }
+
+    if (!movie) {
+        return null;
+    }
+
+    return (
+        <View style={styles.page}>
+            <ScrollView>
                 <Image
-                    style={styles.tinyLogo}
-                    source={require('../../assets/bad.png')}
+                    source={{ uri: `https://image.tmdb.org/t/p/original${movie.backdrop_path}` }}
+                    style={styles.imageBg}
                 />
-                <Text style={styles.text_no_result}>Aucune recherche n'a été effectuée.</Text>
-            </View>
-        )
-    }
+                <View style={styles.movie}>
+                    <View style={styles.header}>
+                        <Image
+                            source={{ uri: `https://image.tmdb.org/t/p/original${movie.poster_path}` }}
+                            style={styles.image}
+                        />
+                        <View style={styles.headerInfo}>
+                            <Image source={require('../../assets/button_play.png')} style={styles.imagePlay} />
+                            {movie.title !== '' && <Text style={styles.title}>{movie.title}</Text>}
+                            {/* {movie.production_companies.length > 0 && <Text style={styles.director}>{movie.production_companies[0].name}</Text>}
+                            {movie.vote_average !== '' && <Text style={[styles.averageNote, movie.vote_average > 5 ? styles.good_film : styles.bad_film]}>{movie.vote_average}</Text>} */}
+                        </View>
+                    </View>
+                    <Text style={styles.overviewTitle}>Synopsis</Text>
+                    {movie.overview !== '' && <Text style={styles.overview}>{movie.overview}</Text>}
+                </View>
+            </ScrollView>
+            {movie.homepage !== '' && (
+                <View style={styles.footer}>
+                    <Button color="#fc6e58" onPress={handlePress} title="Visit website" />
+                </View>
+            )}
+        </View>
 
-    render() {
-        return (
-            // <View>
-                <SafeAreaView style={styles.main_container}>
-                    <FilmDetailsHeader/>
-                </SafeAreaView>
-            // </View>
-        )
-    }
+    )
 }
 
 const styles = StyleSheet.create({
-    main_container: {
+    page: {
+        backgroundColor: "#ffffff",
         flex: 1,
-        backgroundColor: '#fff'
     },
-    result_container: {
+    imageBg: {
+        borderBottomLeftRadius: 15,
+        borderBottomRightRadius: 15,
+        height: 350,
+        resizeMode: 'cover',
+        width: "100%",
+    },
+    header: {
+        display: "flex",
+        flexDirection: "row",
+        marginBottom: 36,
+    },
+    headerInfo: {
+        display: "flex",
+        flexDirection: "column",
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#fff'
     },
-    text_no_result: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#B5A90F',
+    image: {
+        borderColor: "#ffffff",
+        borderRadius: 15,
+        borderWidth: 4,
+        height: 134,
+        marginRight: 15,
+        width: 84,
     },
-    no_found_container: {
-        // flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
+    imagePlay: {
+        alignSelf: "flex-end",
+        height: 58,
+        width: 58,
     },
-    loading_container: {
-        bottom: 300
+    director: {
+        fontSize: 13,
+        fontWeight: "100",
+        marginBottom: 10,
     },
-    tinyLogo: {
-        width: 100,
-        height: 100,
-    }
+    movie: {
+        display: "flex",
+        flexDirection: "column",
+        paddingBottom: 120,
+        paddingLeft: 18,
+        paddingRight: 18,
+        top: -35,
+        zIndex: 1,
+    },
+    averageNote: {
+        fontWeight: 'bold'
+    },
+    good_film: {
+        color: 'green'
+    },
+    bad_film: {
+        color: 'red',
+    },
+    overview: {
+        lineHeight: 24,
+    },
+    overviewTitle: {
+        fontSize: 14,
+        fontWeight: "600",
+        marginBottom: 10,
+    },
+    footer: {
+        backgroundColor: "#ffffff",
+        bottom: 0,
+        left: 0,
+        paddingBottom: 12,
+        paddingLeft: 18,
+        paddingRight: 18,
+        paddingTop: 12,
+        position: "absolute",
+        right: 0,
+        zIndex: 2
+    },
 })

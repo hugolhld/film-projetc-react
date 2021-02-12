@@ -25,6 +25,7 @@ export const Search = (props) => {
                 <TouchableOpacity style={styles.search_button} onPress={() => props.handleClickButton()}>
                     <Text style={styles.text_button}>Rechercher</Text>
                 </TouchableOpacity>
+                
             </View>
         </View>
     )
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     main_container: {
         padding: 30,
         backgroundColor: '#B00020',
-        borderRadius: 15,
+        borderRadius: 20,
 		// paddingTop: getStatusBarHeight(),
     },
     input_container: {
@@ -60,9 +61,9 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     flex_button: {
-        flex: 1,
+        // flex: 1,
         justifyContent: 'flex-end',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     text_button: {
         color: '#fff',

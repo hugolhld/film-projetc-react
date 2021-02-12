@@ -26,11 +26,11 @@ export const LaunchScreen = (props) => {
 
     return (
         <View style={styles.main_container}>
-            <ScrollView>
+            {/* <ScrollView> */}
                 <Logo />
-                <SafeAreaView /* style={styles.flex_container} */>
+                <SafeAreaView style={styles.flex_container}>
                     <FlatList
-                        style={styles.flex_container}
+                        // style={styles.flex_container}
                         data={genres}
                         keyExtractor={item => item.id.toString()}
                         renderItem={({item}) => <GenreItem 
@@ -45,7 +45,7 @@ export const LaunchScreen = (props) => {
                         : null
                     } */}
                 </SafeAreaView>
-            </ScrollView>
+            {/* </ScrollView> */}
         </View>
     )
 }
@@ -69,11 +69,20 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     flex_container: {
-        flex: 1,
-        // alignItems: 'baseline',
-        // alignContent: 'flex-start',
-        flexWrap: 'wrap',
+        // flex: 1,
+        // justifyContent: 'center',
+        // backgroundColor: 'blue',
+        // flexDirection: 'row',
+        // // alignItems: 'baseline',
+        // // alignContent: 'flex-start',
+        // flexWrap: 'wrap',
         // alignItems: 'flex-start'
         // flexFlow
+        flex: 1,
+        // height: 500,
+        alignItems: 'flex-start',
+        alignContent: 'flex-start',
+        flexWrap: 'wrap',
+        flexDirection: 'row'
     }
 })

@@ -14,14 +14,14 @@ export const Logo = () => {
 
 const styles = StyleSheet.create({
     logo_container: {
-        flex: 1,
+        // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20
     },
     tinyLogo: {
-        width: 150,
-        height: 150,
+        width: 100,
+        height: 100,
         borderWidth: 5,
         borderColor: '#B00020',
         borderRadius: 100,
