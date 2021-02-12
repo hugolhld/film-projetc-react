@@ -48,7 +48,7 @@ export default class SearchScreen extends React.Component {
 
     _renderResult = () => {
         if (this.state.filmsState.length > 0) {
-            return <View style={{height:Dimensions.get('window').height}}>
+            return <View style={styles.result_container}>
                 <FlatList
                     data={this.state.filmsState}
                     renderItem={({item, index}) => <FilmItem film={item} index={index} goToDetail={() => this.props.navigation.navigate('Detail', {title: item.title, id: item.id})} />}
@@ -99,23 +99,24 @@ export default class SearchScreen extends React.Component {
 const styles = StyleSheet.create({
     main_container: {
         flex: 1,
-        backgroundColor: '#fff'
+        backgroundColor: '#F4F4F4'
     },
     result_container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff'
+        alignContent: 'center',
     },
     text_no_result: {
         fontSize: 20,
         fontWeight: 'bold',
         color: '#B5A90F',
+        paddingTop: 10
     },
     no_found_container: {
-        // flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     loading_container: {
         bottom: 300

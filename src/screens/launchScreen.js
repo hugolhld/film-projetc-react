@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     main_container: {
         flex: 1,
         marginTop: 20,
-        justifyContent: 'space-around',
+        // justifyContent: 'space-around',
     },
     logo_container: {
         flex: 1,

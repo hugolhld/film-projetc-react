@@ -1,5 +1,6 @@
 import React, {useLayoutEffect, useState, useEffect} from 'react';
 import {Text, View, Image, StyleSheet, ScrollView, Button, Linking} from "react-native";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import {getLatest, getMovie} from "../services/movie";
 
 export const DetailScreen = (props) => {
@@ -8,7 +9,7 @@ export const DetailScreen = (props) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: route && route.params && route.params.title ? route.params.title : 'Dernier film sortit'
+            title: route && route.params && route.params.title ? route.params.title : 'Error'
         })
     })
     useEffect(() => {
@@ -21,16 +22,8 @@ export const DetailScreen = (props) => {
         }
     }, [])
 
-    function handlePress() {
-        if (movie) {
-            Linking.canOpenURL(movie.homepage).then((supported) => {
-                if (supported) {
-                    Linking.openURL(movie.homepage);
-                } else {
-                    console.log("Don't know how to open URI: " + movie.homepage);
-                }
-            });
-        }
+    const handlePress = () => {
+        alert('Soon :(')
     }
 
     if (!movie) {
@@ -51,21 +44,25 @@ export const DetailScreen = (props) => {
                             style={styles.image}
                         />
                         <View style={styles.headerInfo}>
-                            <Image source={require('../../assets/button_play.png')} style={styles.imagePlay} />
+                            <TouchableOpacity onPress={handlePress}>
+                                <Image source={require('../../assets/button_play.png')} style={styles.imagePlay} />
+                            </TouchableOpacity>
                             {movie.title !== '' && <Text style={styles.title}>{movie.title}</Text>}
-                            {/* {movie.production_companies.length > 0 && <Text style={styles.director}>{movie.production_companies[0].name}</Text>}
-                            {movie.vote_average !== '' && <Text style={[styles.averageNote, movie.vote_average > 5 ? styles.good_film : styles.bad_film]}>{movie.vote_average}</Text>} */}
+                            {movie.runtime !== '' && <Text style={styles.title}>{movie.runtime} minutes</Text>}
+                            {/* {movie.production_companies.length > 0 && <Text style={styles.director}>{movie.production_companies[0].name}</Text>}*/}
                         </View>
                     </View>
                     <Text style={styles.overviewTitle}>Synopsis</Text>
                     {movie.overview !== '' && <Text style={styles.overview}>{movie.overview}</Text>}
                 </View>
             </ScrollView>
-            {movie.homepage !== '' && (
-                <View style={styles.footer}>
-                    <Button color="#fc6e58" onPress={handlePress} title="Visit website" />
-                </View>
-            )}
+            {/* {movie.homepage !== '' && ( */}
+                <TouchableOpacity onPress={handlePress} style={styles.footer} >
+                    <Text style={{textAlign: 'center', color: '#B5A90F'}}>
+                        Trailer
+                    </Text>
+                </TouchableOpacity>
+            {/* )} */}
         </View>
 
     )
@@ -73,7 +70,7 @@ export const DetailScreen = (props) => {
 
 const styles = StyleSheet.create({
     page: {
-        backgroundColor: "#ffffff",
+        backgroundColor: "#FAFAFA",
         flex: 1,
     },
     imageBg: {
@@ -120,25 +117,18 @@ const styles = StyleSheet.create({
         top: -35,
         zIndex: 1,
     },
-    averageNote: {
-        fontWeight: 'bold'
-    },
-    good_film: {
-        color: 'green'
-    },
-    bad_film: {
-        color: 'red',
-    },
     overview: {
         lineHeight: 24,
+        color: '#B5A90F'
     },
     overviewTitle: {
         fontSize: 14,
         fontWeight: "600",
         marginBottom: 10,
+        color: '#B5A90F'
     },
     footer: {
-        backgroundColor: "#ffffff",
+        backgroundColor: "#B00020",
         bottom: 0,
         left: 0,
         paddingBottom: 12,
@@ -147,6 +137,11 @@ const styles = StyleSheet.create({
         paddingTop: 12,
         position: "absolute",
         right: 0,
-        zIndex: 2
+        zIndex: 2,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
+    title: {
+        color: '#B5A90F'
+    }
 })

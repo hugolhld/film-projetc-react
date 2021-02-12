@@ -28,7 +28,20 @@ export const NavGenre = () => {
           
                 />
             {/* <Stack.Screen name="Recherche" component={MainBottomNavigator} />*/}
-            <Stack.Screen name="Detail" component={DetailScreen} /> 
+            <Stack.Screen 
+              name="Detail"
+              component={DetailScreen}
+              options={{
+                  // title: ({ route }) => ({ title: route.params.genre }),
+                  headerStyle: {
+                    backgroundColor: 'transparent',
+                  },
+                  headerTintColor: '#B00020',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }} 
+              /> 
         </Stack.Navigator>
     )
 }

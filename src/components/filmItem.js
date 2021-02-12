@@ -8,43 +8,48 @@ export const FilmItem = (props) => {
     const [isLoading, setIsLoading] = useState(false)
     const [directorName, setDirectorName] = useState([])
 
-    // useEffect(() => {
-    //     setIsLoading(true);
-    //     getMovieCredits(film.id).then(data => {
-    //         setIsLoading(false);
-    //         setFilmData(data.crew);
-    //     })
-    // }, [])
-
-    // const testt = () => {
-    //     if(filmData) {
-    //         for(const director of filmData) {
-    //             console.log(director.job);
-    //             if(director.job == 'Director') {
-    //                 setDirectorName(director.original_name)
+    // if(!isLoading)
+    // {
+    //     getDirectorMovie(movieId.id)
+    //         .then(data => {
+    //             setMovieCrew(data)
+    //             if(movieCrew)
+    //             {
+    //                 for(let i = 0;i < movieCrew.crew.length; i++)
+    //                 {
+    //                     if(movieCrew.crew[i].job == 'Director')
+    //                     {
+    //                         setMovieDirector(movieCrew.crew[i])
+    //                         setIsLoading(true)
+    //                         i = movieCrew.crew.length
+    //                     }
+    //                 }
+    //                 setIsLoading(true)
     //             }
-    //         }
-    //     }
+    //         })
     // }
-    // // console.log(filmData);
-    // testt()
-    // console.log(filmData.production_companies.length > 0 && <Text style={styles.director}>{filmData.production_companies[0].name}</Text>);
+
     return (
-        <View>
-            <TouchableOpacity style={styles.main_container} onPress={goToDetail}>
+        <View style={styles.main_container} >
+            <TouchableOpacity /* style={styles.main_container}  */onPress={goToDetail}>
                 <View style={styles.main_information_container}>
-                    <Image source={{uri: `https://image.tmdb.org/t/p/original${film.poster_path}`}} style={styles.image} />
-                    <View style={styles.content_container}>
-                        <View>
-                            <Text style={styles.title_text}>{film.title}</Text>
+                    <View style={styles.main_information_content}>
+                        <Image source={{uri: `https://image.tmdb.org/t/p/original${film.poster_path}`}} style={styles.image} />
+                        <View style={styles.content_container}>
+                            <View>
+                                <Text style={styles.title_text}>{film.title}</Text>
+                            </View>
+                            <View>
+                                {/* <Text style={styles.title_text}>{directorName}</Text> */}
+                                {/* {film.production_companies.length > 0 && <Text style={styles.director}>{film.production_companies[0].name}</Text>} */}
+                            </View>
+                            <View>
+                                <Text style={{color: '#B5A90F'}}>{film.release_date}</Text>
+                            </View>
                         </View>
-                        <View>
-                            {/* <Text style={styles.title_text}>{directorName}</Text> */}
-                            {/* {film.production_companies.length > 0 && <Text style={styles.director}>{film.production_companies[0].name}</Text>} */}
-                        </View>
-                        <View>
-                            <Text>{film.release_date}</Text>
-                        </View>
+                    </View>
+                    <View>
+                        <Text style={{fontSize: 18, fontWeight: 'bold', color: '#B5A90F'}}>{film.vote_average}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -68,29 +73,21 @@ const styles = StyleSheet.create({
 
         elevation: 5,
     },
-    shadow: {  
-        // borderColor:'yourchoice', // if you need 
-        borderWidth:1,
-        overflow: 'hidden',
-        shadowColor: 'red',
-        shadowRadius: 10,
-        shadowOpacity: 1,
-        elevation: 10
-    },
     content_container: {
         // flex: 1,
         margin: 5,
         justifyContent: 'center',
     },
     main_information_container: {
+        width: '100%',
         flexDirection: 'row',
-        // shadowColor: "#B00020",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 4,
-        // },
-        // shadowOpacity: 0.25,
-        // shadowRadius: 3,
+        alignItems:'center',
+        justifyContent: 'space-around'
+    },
+    main_information_content: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems:'center',
     },
     image: {
         width: 80,
@@ -101,7 +98,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
         flexWrap: 'wrap',
-        paddingRight: 5
+        paddingRight: 5,
+        color: '#B5A90F'
     },
     picto: {
         width: 30,
